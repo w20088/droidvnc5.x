@@ -23,7 +23,6 @@ upload_beta.sh
 stamp-*
 x11vnc*.tar.gz
 config.h.in
-rfbconfig.h
 rfbconfig.h.in
 install-sh
 missing

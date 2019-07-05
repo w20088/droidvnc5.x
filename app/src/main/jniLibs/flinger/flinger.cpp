@@ -110,7 +110,7 @@ extern "C" int init_flinger()
         return -1;
   }
   
-  status_t result = screenshotClient->update(display);
+  status_t result = screenshotClient->update(display, Rect(), false);
   if (!screenshotClient->getPixels())
     return -1;
 
@@ -122,7 +122,7 @@ extern "C" int init_flinger()
 
 extern "C" unsigned int *readfb_flinger()
 {
-  status_t result = screenshotClient->update(display);
+  status_t result = screenshotClient->update(display, Rect(), false);
   return (unsigned int*)screenshotClient->getPixels();
 }
 

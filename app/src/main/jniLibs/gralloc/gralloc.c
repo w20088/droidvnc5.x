@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <hardware/hardware.h>
 #include <hardware/gralloc.h>
 #include <cutils/log.h>
-
 #define r(fd, ptr, size) (read((fd), (ptr), (size)) != (int)(size))
 #define w(fd, ptr, size) (write((fd), (ptr), (size)) != (int)(size))
 
@@ -40,6 +39,8 @@ struct alloc_device_t *allocdev = 0;
 buffer_handle_t buf = 0;
 unsigned char* data = 0;
 int stride;
+
+#define HAL_PIXEL_FORMAT_RGBA_4444 7
 
 static int fill_format(int format)
 {
@@ -93,11 +94,11 @@ int init_gralloc()
   
     CHECK_RV;
   
-    if (!fbdev->read) {
-        rv = -ENOTSUP;
-        close_gralloc();
-        return rv;
-    }
+    //if (!fbdev->read) {
+    //    rv = -ENOTSUP;
+    //    close_gralloc();
+    //    return rv;
+    //}
  
     rv = gralloc_open(&gralloc->common, &allocdev);
     
@@ -108,7 +109,7 @@ int init_gralloc()
                          &buf, &stride);
 
 
-    rv = fbdev->read(fbdev, buf);
+    //rv = fbdev->read(fbdev, buf);
 
     CHECK_RV;
     
@@ -161,7 +162,7 @@ unsigned char *readfb_gralloc ()
 {
     int rv;
 
-    rv = fbdev->read(fbdev, buf);
+    //rv = fbdev->read(fbdev, buf);
 
     CHECK_RV_P;
     
