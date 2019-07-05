@@ -1,65 +1,42 @@
-apply plugin: 'com.android.model.application'
-model {
-    android {
-        compileSdkVersion 22
-        buildToolsVersion "25.0.2"
+apply plugin: 'com.android.application'
 
-
-        defaultConfig {
-            applicationId "org.onaips.vnc"
-            minSdkVersion.apiLevel 15
-            targetSdkVersion.apiLevel 22
-
-            buildConfigFields {
-                create() {
-                    type "int"
-                    name "VALUE"
-                    value "1"
-                }
-            }
-            /* compileOptions {
-                 sourceCompatibility JavaVersion.VERSION_1_5
-                 targetCompatibility JavaVersion.VERSION_1_5
-             }*/
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "org.onaips.vnc"
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
-        buildTypes {
-            release {
-                minifyEnabled false
-                // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-                proguardFiles.add(file("proguard-rules.pro"))
-            }
-        }
-
-//        ndk {
-//            platformVersion = 16
-//            moduleName = 'droidVNC'
-//            toolchain = 'clang'
-//            //stl = 'gnustl_static'
-//            stl = 'stlport_static'
-//            cppFlags.addAll(['-std=c++11', '-Wall', '-Wno-long-long'])
-//            ldLibs.addAll(['android', 'log', 'z'])
-//            // build a default combined apk including all ABIs.
-//            //abiFilters.addAll(['armeabi', 'armeabi-v7a'])//'x86', 'arm', 'armeabi' ])
-//            debuggable true
-//        }
-
-        // Configures source set directory.
-        sources {
+        sourceSets{
             main {
-                java {
-                    source {
-                        srcDir "src"
-                    }
-                }
+                jni.srcDirs = []
             }
         }
-
 
     }
+    lintOptions {
+          checkReleaseBuilds false
+          // Or, if you prefer, you can continue to check for errors in release builds,
+          // but continue the build even when errors are found:
+          abortOnError false
+    }
+
 }
 
 dependencies {
-    compile files('libs/GoogleAdMobAdsSdk-6.0.1.jar')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

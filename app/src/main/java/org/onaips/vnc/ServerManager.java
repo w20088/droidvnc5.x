@@ -1,5 +1,6 @@
 package org.onaips.vnc;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -295,6 +296,7 @@ public class ServerManager extends Service {
 		}
 	}
 
+	@SuppressLint("InvalidWakeLockTag")
 	public void showClientConnected(String c) {
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
@@ -303,7 +305,7 @@ public class ServerManager extends Service {
 		CharSequence tickerText = c + " connected to VNC server";
 		long when = System.currentTimeMillis();
 
-		Notification notification = new Notification(icon, tickerText, when);
+		//Notification notification = new Notification(icon, tickerText, when);
 
 		Context context = getApplicationContext();
 		CharSequence contentTitle = "Droid VNC Server";
@@ -312,8 +314,14 @@ public class ServerManager extends Service {
 		PendingIntent contentIntent = PendingIntent.getActivity(
 				getApplicationContext(), 0, notificationIntent, 0);
 
-		notification.setLatestEventInfo(context, contentTitle, contentText,
-				contentIntent);
+		Notification notification = new Notification.Builder(context)
+				.setAutoCancel(true)
+				.setContentTitle("title")
+				.setContentText("describe")
+				.setContentIntent(contentIntent)
+				.setSmallIcon(R.drawable.ic_launcher_foreground)
+				.setWhen(System.currentTimeMillis())
+				.build();
 
 		mNotificationManager.notify(MainActivity.APP_ID, notification);
 

@@ -71,7 +71,7 @@ LOCAL_C_INCLUDES += \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/common \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/rfb \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/ \
-										$(LOCAL_PATH)/../../jniLibs/
+										$(LOCAL_PATH)/../../nativeMethods/
 
 LOCAL_STATIC_LIBRARIES := libjpeg libpng libssl_static libcrypto_static
 

@@ -42,7 +42,7 @@ LOCAL_CFLAGS  +=  -Wall \
 									-DLIBVNCSERVER_WITH_WEBSOCKETS \
 									-DLIBVNCSERVER_HAVE_LIBPNG \
 									-DLIBVNCSERVER_HAVE_ZLIB \
-									-DLIBVNCSERVER_HAVE_LIBJPEG 
+									-DLIBVNCSERVER_HAVE_LIBJPEG
 
 LOCAL_LDLIBS +=  -llog -lz -ldl
 
@@ -71,7 +71,7 @@ LOCAL_C_INCLUDES += \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/common \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/rfb \
 										$(LOCAL_PATH)/$(LIBVNCSERVER_ROOT)/ \
-										$(LOCAL_PATH)/../../nativeMethods/
+										$(LOCAL_PATH)/../../jniLibs/
 
 LOCAL_STATIC_LIBRARIES := libjpeg libpng libssl_static libcrypto_static
 
